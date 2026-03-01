@@ -8,26 +8,26 @@ const router: Router = express.Router();
 
 
 router.get("/health", healthCheck); 
-router.get("/", getAllEvent);
+router.get("/events", getAllEvent);
 router.get(
-       "/:id",
+       "/events/:id",
        validateRequest(eventSchemas.getById),
        productController.getEventById
 );
 
 router.post(
-       "/",
+       "/events",
        validateRequest(eventSchemas.create),
        productController.createEvent
 );
 
 router.put(
-       "/:id",
+       "/events/:id",
        validateRequest(eventSchemas.update),
        productController.updateEvent
 ); 
 router.delete(
-       "/:id",
+       "/events/:id",
        validateRequest(eventSchemas.delete),
        productController.deleteEvent
 ); 

@@ -14,6 +14,6 @@ app.get("/", (req, res) => {
     res.send("Hello, World!");
 });
 
-app.use("/api/v1/events", eventRoutes);
+app.use("/api/v1", eventRoutes);
 
 export default app;
