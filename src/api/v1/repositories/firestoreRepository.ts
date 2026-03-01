@@ -42,10 +42,17 @@ const addDocument = async <T>(collectionName: string, event: Event): Promise<Eve
  * @returns {Promise<void>}
  * @throws {Error} - If an error occurs during document update.
  */
-export const updateDocument = async <T>(collectionName: string, id: string, event: Partial<T>): Promise<void> => {
+export const updateDocument = async <T>(collectionName: string, id: string, event: Partial<T>): Promise<Event> => {
     try {
-       await db.collection(collectionName).doc(id).update(event);
+       const docRef: DocumentReference = db.collection(collectionName).doc(id);
+       await docRef.update(event);
 
+       const updatedEvent = await docRef.get();
+       if(!updatedEvent.exists){
+              throw new Error("Event not found");
+       }
+       return updatedEvent.data() as Event;
+       
     } catch (error: unknown) {
        const errorMessage =
        error instanceof Error ? error.message : "Unknown error";
