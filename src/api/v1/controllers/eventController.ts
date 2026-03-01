@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { Event } from "../models/eventModelModel";
 import { HTTP_STATUS } from "../../../constants/httpConstants"
 import * as eventService from "../services/eventService";
 import { successResponse } from "../models/responseModel";
@@ -22,7 +21,7 @@ export const healthCheck = (req: Request, res: Response) => {
  */
 export const updateEvent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        await eventService.updateEvent(req.params.id as string, req.body);
+        await eventService.updateEvent(req.params.id, req.body);
         res.status(HTTP_STATUS.OK).json(successResponse({}));
     } catch (error: unknown) {
         next(error);
