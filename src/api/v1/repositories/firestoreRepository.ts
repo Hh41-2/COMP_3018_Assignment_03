@@ -3,7 +3,7 @@ import { DocumentReference } from "firebase-admin/firestore";
 import { Event } from "../models/eventModel";
 
 
-const addDocument = async <T>(collectionName: string, event: Event): Promise<void> => {
+const addDocument = async <T>(collectionName: string, event: Event): Promise<Event> => {
     try{
        // Create a reference to a document in the 'users' collection with ID 'user1'
        // If the document doesn't exist, it will be created
@@ -11,17 +11,19 @@ const addDocument = async <T>(collectionName: string, event: Event): Promise<voi
 
        // Use the `set` method to add or overwrite data in the document
        // The data is passed as an object with fields and their values
-       await docRef.set({
+       const newEvent: Event = {
               id: docRef.id,
               name: event.name,
               date: event.date,
               capacity: event.capacity,
               registrationCount: event.registrationCount ?? 0,
               status: event.status ?? "active",              category: event.category ?? "general",
-              createdAt: Date,
-              updatedAt: Date,
-       });
+              createdAt: new Date(),
+              updatedAt: new Date(),
+       };
+       await docRef.set(newEvent);
        console.log("Document added");
+       return newEvent;
 
     } catch (error: unknown) {
         const errorMessage =
