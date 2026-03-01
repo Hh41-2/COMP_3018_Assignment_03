@@ -1,5 +1,6 @@
 import { db } from "../../../../config/firebaseConfig";
 import { DocumentReference } from "firebase-admin/firestore";
+import { QuerySnapshot } from "firebase-admin/firestore";
 import { Event } from "../models/eventModel";
 
 
@@ -55,9 +56,32 @@ export const updateDocument = async <T>(collectionName: string, id: string, even
        
     } catch (error: unknown) {
        const errorMessage =
-       error instanceof Error ? error.message : "Unknown error";
+              error instanceof Error ? error.message : "Unknown error";
        throw new Error(
-       `Failed to create document in ${collectionName}: ${errorMessage}`
+              `Failed to create document in ${collectionName}: ${errorMessage}`
+       );
+    }
+};
+
+const getAllDocument = async (collectionName: string): Promise<Event[]> => {
+    try{
+       // Retrieve all documents from the 'users' collection
+       // `get()` returns a QuerySnapshot containing all documents in the collection
+       const snapshot: QuerySnapshot = await db.collection(collectionName).get();
+
+       const eventList: Event[] = snapshot.docs.map((doc) => {
+              return {
+              id: doc.id,
+              ...doc.data()
+              } as Event;
+       });
+       return eventList;
+
+    } catch (error: unknown) {
+       const errorMessage =
+              error instanceof Error ? error.message : "Unknown error";
+       throw new Error(
+              `Failed to create document in ${collectionName}: ${errorMessage}`
        );
     }
 };
