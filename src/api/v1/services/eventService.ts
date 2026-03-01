@@ -23,3 +23,7 @@ export const getEventById = async (id: string): Promise<Event> => {
        return eventById;
 }
 
+export const deleteEvent = async (id: string): Promise<void> => {
+       await firestoreRepository.deleteDocument(EVENTS_COLLECTION,id);
+}
+
