@@ -22,7 +22,7 @@ export const healthCheck = (req: Request, res: Response) => {
 export const updateEvent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         await eventService.updateEvent(req.params.id, req.body);
-        res.status(HTTP_STATUS.OK).json(successResponse({}));
+        res.status(HTTP_STATUS.OK).json(successResponse());
     } catch (error: unknown) {
         next(error);
     }
@@ -38,7 +38,7 @@ export const updateEvent = async (req: Request, res: Response, next: NextFunctio
 export const createEvent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const newEvent = await eventService.createEvent(req.body);
-        res.status(HTTP_STATUS.CREATED).json(successResponse({newEvent}, "Event created"));
+        res.status(HTTP_STATUS.CREATED).json(successResponse("Event created", {newEvent}));
     } catch (error: unknown) {
         next(error);
     }
@@ -54,7 +54,7 @@ export const createEvent = async (req: Request, res: Response, next: NextFunctio
 export const getAllEvent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const allEvent = await eventService.getAllEvent();
-        res.status(HTTP_STATUS.OK).json(successResponse({allEvent}, "Event retrieved"));
+        res.status(HTTP_STATUS.OK).json(successResponse("Event retrieved", {allEvent}));
     } catch (error: unknown) {
         next(error);
     }
@@ -70,7 +70,7 @@ export const getAllEvent = async (req: Request, res: Response, next: NextFunctio
 export const getEventById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const allEvent = await eventService.getEventById(req.params.id);
-        res.status(HTTP_STATUS.OK).json(successResponse({allEvent}, "Event retrieved"));
+        res.status(HTTP_STATUS.OK).json(successResponse("Event retrieved", {allEvent}));
     } catch (error: unknown) {
         next(error);
     }
@@ -86,7 +86,7 @@ export const getEventById = async (req: Request, res: Response, next: NextFuncti
 export const deleteEvent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const allEvent = await eventService.deleteEvent(req.params.id);
-        res.status(HTTP_STATUS.OK).json(successResponse({allEvent}, "Event deleted"));
+        res.status(HTTP_STATUS.OK).json(successResponse("Event deleted", {allEvent}));
     } catch (error: unknown) {
         next(error);
     }
