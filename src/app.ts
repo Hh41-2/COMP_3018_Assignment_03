@@ -1,6 +1,6 @@
 import express, { Express } from "express";
 import morgan from "morgan";
-//import eventRoutes from "./api/v1/routes/eventRoutes";
+import eventRoutes from "./api/v1/routes/eventRoutes";
 
 
 // Initialize Express application
@@ -14,6 +14,6 @@ app.get("/", (req, res) => {
     res.send("Hello, World!");
 });
 
-app.use("/api/v1/events", );
+app.use("/api/v1/events", eventRoutes);
 
 export default app;
