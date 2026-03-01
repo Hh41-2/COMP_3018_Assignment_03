@@ -85,3 +85,29 @@ const getAllDocument = async (collectionName: string): Promise<Event[]> => {
        );
     }
 };
+
+const getDocumentById = async (collectionName: string, id: string): Promise<Event> => {
+    try{
+       // Create a reference to a specific document in the 'users' collection
+       const docRef: DocumentReference = db.collection(collectionName).doc(id);
+
+       // Use the `get()` method to retrieve the document
+       const doc = await docRef.get();
+       
+       // Check if the document exists
+       if (!doc.exists){
+              throw new Error("Event not found");
+       }
+       const eventById = {id: doc.id, ...doc.data()} as Event;
+
+       return eventById;
+
+    } catch (error: unknown) {
+       const errorMessage =
+              error instanceof Error ? error.message : "Unknown error";
+       throw new Error(
+              `Failed to create document in ${collectionName}: ${errorMessage}`
+       );
+    }
+};
+
