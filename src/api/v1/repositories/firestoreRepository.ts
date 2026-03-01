@@ -4,7 +4,7 @@ import { QuerySnapshot } from "firebase-admin/firestore";
 import { Event } from "../models/eventModel";
 
 
-const addDocument = async <T>(collectionName: string, event: Event): Promise<Event> => {
+export const addDocument = async <T>(collectionName: string, event: Event): Promise<Event> => {
     try{
        // Create a reference to a document in the 'users' collection with ID 'user1'
        // If the document doesn't exist, it will be created
@@ -63,7 +63,7 @@ export const updateDocument = async <T>(collectionName: string, id: string, even
     }
 };
 
-const getAllDocument = async (collectionName: string): Promise<Event[]> => {
+export const getAllDocument = async (collectionName: string): Promise<Event[]> => {
     try{
        // Retrieve all documents from the 'users' collection
        // `get()` returns a QuerySnapshot containing all documents in the collection
@@ -86,7 +86,7 @@ const getAllDocument = async (collectionName: string): Promise<Event[]> => {
     }
 };
 
-const getDocumentById = async (collectionName: string, id: string): Promise<Event> => {
+export const getDocumentById = async (collectionName: string, id: string): Promise<Event> => {
     try{
        // Create a reference to a specific document in the 'users' collection
        const docRef: DocumentReference = db.collection(collectionName).doc(id);
@@ -111,7 +111,7 @@ const getDocumentById = async (collectionName: string, id: string): Promise<Even
     }
 };
 
-const deleteDocument = async (collectionName: string, id: string): Promise<void> => {
+export const deleteDocument = async (collectionName: string, id: string): Promise<void> => {
     try{
        // Create a reference to a specific document in the 'users' collection
        const docRef: DocumentReference = db.collection(collectionName).doc(id);
