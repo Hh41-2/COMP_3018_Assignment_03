@@ -76,3 +76,19 @@ export const getEventById = async (req: Request, res: Response, next: NextFuncti
         next(error);
     }
 };
+
+/**
+ * Handles deleting an event by id.
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ * @param {NextFunction} next - The next middleware function.
+ * @returns {Promise<void>}
+ */
+export const deleteEvent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const allEvent = await eventService.deleteEvent(req.params.id);
+        res.status(HTTP_STATUS.OK).json(successResponse({allEvent}, "Event deleted"));
+    } catch (error: unknown) {
+        next(error);
+    }
+};
