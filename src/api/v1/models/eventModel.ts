@@ -4,6 +4,7 @@ export interface Event {
        date: Date;
        capacity: number;
        registrationCount: number;
+       status: string;
        category: string;
        createdAt: Date;
        updatedAt: Date;
