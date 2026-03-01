@@ -14,7 +14,7 @@ export const healthCheck = (req: Request, res: Response) => {
 }
 
 /**
- * Handles updating a event.
+ * Handles updating an event.
  * @param {Request} req - The request object.
  * @param {Response} res - The response object.
  * @param {NextFunction} next - The next middleware function.
@@ -30,7 +30,7 @@ export const updateEvent = async (req: Request, res: Response, next: NextFunctio
 };
 
 /**
- * Handles creating a post.
+ * Handles creating an event.
  * @param {Request} req - The request object.
  * @param {Response} res - The response object.
  * @param {NextFunction} next - The next middleware function.
@@ -39,7 +39,23 @@ export const updateEvent = async (req: Request, res: Response, next: NextFunctio
 export const createEvent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const newEvent = await eventService.createEvent(req.body);
-        res.status(HTTP_STATUS.OK).json(successResponse({newEvent}, "Event created"));
+        res.status(HTTP_STATUS.CREATED).json(successResponse({newEvent}, "Event created"));
+    } catch (error: unknown) {
+        next(error);
+    }
+};
+
+/**
+ * Handles retrieving all event.
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ * @param {NextFunction} next - The next middleware function.
+ * @returns {Promise<void>}
+ */
+export const getAllEvent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const allEvent = await eventService.getAllEvent();
+        res.status(HTTP_STATUS.OK).json(successResponse({allEvent}, "Event retrieved"));
     } catch (error: unknown) {
         next(error);
     }
