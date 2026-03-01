@@ -17,7 +17,7 @@ const addDocument = async <T>(collectionName: string, event: Event): Promise<voi
               date: event.date,
               capacity: event.capacity,
               registrationCount: event.registrationCount ?? 0,
-              category: event.category ?? "active",
+              status: event.status ?? "active",              category: event.category ?? "general",
               createdAt: Date,
               updatedAt: Date,
        });
