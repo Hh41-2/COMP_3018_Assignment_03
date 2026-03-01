@@ -12,3 +12,9 @@ export const updateEvent = async (id: string, event: Event): Promise<Event> => {
        const updatedEvent = await firestoreRepository.updateDocument(EVENTS_COLLECTION, id, event);
        return updatedEvent;
 }
+
+export const getAllEvent = async (): Promise<Event[]> => {
+       const allEvent = await firestoreRepository.getAllDocument(EVENTS_COLLECTION);
+       return allEvent;
+}
+
