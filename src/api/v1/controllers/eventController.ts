@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { Event } from "../models/eventModelModel";
 import { HTTP_STATUS } from "../../../constants/httpConstants"
 import * as eventService from "../services/eventService";
@@ -55,6 +55,22 @@ export const createEvent = async (req: Request, res: Response, next: NextFunctio
 export const getAllEvent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const allEvent = await eventService.getAllEvent();
+        res.status(HTTP_STATUS.OK).json(successResponse({allEvent}, "Event retrieved"));
+    } catch (error: unknown) {
+        next(error);
+    }
+};
+
+/**
+ * Handles retrieving an event by id.
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ * @param {NextFunction} next - The next middleware function.
+ * @returns {Promise<void>}
+ */
+export const getEventById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const allEvent = await eventService.getEventById(req.params.id);
         res.status(HTTP_STATUS.OK).json(successResponse({allEvent}, "Event retrieved"));
     } catch (error: unknown) {
         next(error);
