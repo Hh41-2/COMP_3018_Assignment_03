@@ -58,7 +58,7 @@ export const updateDocument = async <T>(collectionName: string, id: string, even
        const errorMessage =
               error instanceof Error ? error.message : "Unknown error";
        throw new Error(
-              `Failed to create document in ${collectionName}: ${errorMessage}`
+              `Failed to update document in ${collectionName}: ${errorMessage}`
        );
     }
 };
@@ -81,7 +81,7 @@ const getAllDocument = async (collectionName: string): Promise<Event[]> => {
        const errorMessage =
               error instanceof Error ? error.message : "Unknown error";
        throw new Error(
-              `Failed to create document in ${collectionName}: ${errorMessage}`
+              `Failed to retrieve all document in ${collectionName}: ${errorMessage}`
        );
     }
 };
@@ -106,7 +106,7 @@ const getDocumentById = async (collectionName: string, id: string): Promise<Even
        const errorMessage =
               error instanceof Error ? error.message : "Unknown error";
        throw new Error(
-              `Failed to create document in ${collectionName}: ${errorMessage}`
+              `Failed to retrieve document with id: ${id} in ${collectionName}: ${errorMessage}`
        );
     }
 };
