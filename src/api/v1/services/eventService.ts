@@ -18,3 +18,8 @@ export const getAllEvent = async (): Promise<Event[]> => {
        return allEvent;
 }
 
+export const getEventById = async (id: string): Promise<Event> => {
+       const eventById = await firestoreRepository.getDocumentById(EVENTS_COLLECTION,id);
+       return eventById;
+}
+
