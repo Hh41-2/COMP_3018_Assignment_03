@@ -111,3 +111,20 @@ const getDocumentById = async (collectionName: string, id: string): Promise<Even
     }
 };
 
+const deleteDocument = async (collectionName: string, id: string): Promise<void> => {
+    try{
+       // Create a reference to a specific document in the 'users' collection
+       const docRef: DocumentReference = db.collection(collectionName).doc(id);
+
+       // Use the `delete()` method to remove the document from Firestore
+       await docRef.delete();
+
+    } catch (error: unknown) {
+       const errorMessage =
+              error instanceof Error ? error.message : "Unknown error";
+       throw new Error(
+              `Failed to delete document in ${collectionName}: ${errorMessage}`
+       );
+    }
+       
+};
