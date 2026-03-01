@@ -12,3 +12,19 @@ export const healthCheck = (req: Request, res: Response) => {
               version: "1.0.0",
        });
 }
+
+/**
+ * Handles updating a post.
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ * @param {NextFunction} next - The next middleware function.
+ * @returns {Promise<void>}
+ */
+export const updatePost = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        await eventService.updateEvent(req.params.id as string, req.body);
+        res.status(HTTP_STATUS.OK).json(successResponse({}));
+    } catch (error: unknown) {
+        next(error);
+    }
+};
