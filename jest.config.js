@@ -9,10 +9,3 @@ module.exports = {
         "!src/types/**/*.ts", // Exclude type definitions
     ],
 };
-
-Then update package.json
-"scripts": {
-  "test": "jest",
-  "test:watch": "jest --watch",
-  "test:coverage": "jest --coverage"
-}
