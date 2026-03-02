@@ -21,8 +21,8 @@ export const healthCheck = (req: Request, res: Response) => {
  */
 export const updateEvent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        await eventService.updateEvent(req.params.id, req.body);
-        res.status(HTTP_STATUS.OK).json(successResponse());
+        const updatedEvent = await eventService.updateEvent(req.params.id, req.body);
+        res.status(HTTP_STATUS.OK).json(successResponse("Event updated",{updatedEvent}));
     } catch (error: unknown) {
         next(error);
     }
