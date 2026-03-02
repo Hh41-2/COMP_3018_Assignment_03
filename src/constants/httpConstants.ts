@@ -1,7 +1,7 @@
 export const HTTP_STATUS = {
-    OK: 200,
-    CREATED: 201,
-    BAD_REQUEST: 400,
-    NOT_FOUND: 404,
-    INTERNAL_SERVER_ERROR: 500,
+    OK: 200, // request succeeded
+    CREATED: 201, // resource successfully created
+    BAD_REQUEST: 400, // HTTP error on a client-side 
+    NOT_FOUND: 404, // requested server does not exist 
+    INTERNAL_SERVER_ERROR: 500, // unexpected problem
 } as const;

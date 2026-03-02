@@ -3,6 +3,11 @@ import { HTTP_STATUS } from "../../../constants/httpConstants"
 import * as eventService from "../services/eventService";
 import { successResponse } from "../models/responseModel";
 
+/*
+ * Handles healtch Check.
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.  
+ * */
 export const healthCheck = (req: Request, res: Response) => {
        res.status(200).json({
               status: "OK",
