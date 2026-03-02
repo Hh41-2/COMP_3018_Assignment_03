@@ -19,8 +19,8 @@ export const addDocument = async <T>(collectionName: string, event: Event): Prom
               capacity: event.capacity,
               registrationCount: event.registrationCount ?? 0,
               status: event.status ?? "active",              category: event.category ?? "general",
-              createdAt: new Date(),
-              updatedAt: new Date(),
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
        };
        await docRef.set(newEvent);
        console.log("Document added");
